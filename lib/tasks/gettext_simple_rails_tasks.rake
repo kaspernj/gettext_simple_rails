@@ -1,8 +1,3 @@
-# desc "Explaining what the task does"
-# task :gettext_simple_rails do
-#   # Task goes here
-# end
-
 namespace :gettext_simple_rails do
   task "generate_model_translation_files" => :environment do
     GettextSimpleRails::ModelInspector.model_classes do |inspector|
@@ -23,6 +18,15 @@ namespace :gettext_simple_rails do
         fp.puts "  def self.relationship_translations"
         
         inspector.relationships do |name, relationship|
+          fp.puts "    puts _('#{inspector.relationship_gettext_key(name)}')"
+        end
+        
+        fp.puts "  end"
+        
+        fp.puts ""
+        fp.puts "  def self.paperclip_attachments"
+        
+        inspector.paperclip_attachments do |name|
           fp.puts "    puts _('#{inspector.relationship_gettext_key(name)}')"
         end
         

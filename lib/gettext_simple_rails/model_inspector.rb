@@ -24,6 +24,16 @@ class GettextSimpleRails::ModelInspector
     end
   end
   
+  def paperclip_attachments
+    if !::Kernel.const_defined?("Paperclip")
+      return []
+    end
+    
+    Paperclip::AttachmentRegistry.names_for(@clazz).each do |name|
+      yield(name)
+    end
+  end
+  
   def snake_name
     return ::StringCases.camel_to_snake(clazz.name)
   end
