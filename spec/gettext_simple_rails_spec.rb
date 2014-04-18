@@ -1,8 +1,8 @@
-require 'test_helper'
+require 'spec_helper'
 require 'rake'
 
-class GettextSimpleRailsTest < ActiveSupport::TestCase
-  setup do
+describe GettextSimpleRails do
+  before do
     if !$translations_generated
       $translations_generated = true
       
@@ -17,7 +17,7 @@ class GettextSimpleRailsTest < ActiveSupport::TestCase
     end
   end
   
-  test "generates model translations" do
+  it "generates model translations" do
     user_model_translations_path = "#{GettextSimpleRails.translation_dir}/models/user_model_translations.rb"
     assert File.exists?(user_model_translations_path), "a file with user model translations should have been created but wasn't."
     content = File.read(user_model_translations_path)
@@ -34,7 +34,7 @@ class GettextSimpleRailsTest < ActiveSupport::TestCase
     assert content.include?("puts _('models.attributes.user.roles')"), "didn't contain relationship translations"
   end
   
-  test "can inject the translations into I18n" do
+  it "can inject the translations into I18n" do
     require "gettext_simple"
     gs = GettextSimple.new
     locales = gs.instance_variable_get(:@locales)
