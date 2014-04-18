@@ -7,4 +7,3 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/dummy/.sass-cache
 bin
-test/dummy/lib/gettext_simple_rails/models/*
