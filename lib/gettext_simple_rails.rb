@@ -12,11 +12,11 @@ module GettextSimpleRails
     return "#{Rails.root}/lib/gettext_simple_rails"
   end
   
-  def self.write_recursive_translations(fp, translations, pre_path = [])
+  def self.write_recursive_translations(fp, translations, pre_path = [], args = {})
     if translations.is_a?(Hash)
       translations.each do |key, val|
         newpath = pre_path + [key]
-        write_recursive_translations(fp, val, newpath)
+        write_recursive_translations(fp, val, newpath, :comment => "Default value: #{val}")
       end
     elsif translations.is_a?(Array)
       translations.each do |val|
@@ -24,6 +24,12 @@ module GettextSimpleRails
         write_recursive_translations(fp, val, newpath)
       end
     elsif translations.is_a?(String) || translations.is_a?(Fixnum)
+      if args[:comment]
+        args[:comment].to_s.each_line do |line|
+          fp.puts "    #. #{line}"
+        end
+      end
+      
       fp.puts "    _('#{pre_path.join(".")}')"
     else
       raise "Unknownt class: '#{translations.class.name}'."
