@@ -1,4 +1,9 @@
 namespace :gettext_simple_rails do
+  task "all" => :environment do
+    Rake::Task["gettext_simple_rails:generate_translator_files"].execute
+    Rake::Task["gettext_simple_rails:generate_model_translation_files"].execute
+  end
+  
   task "generate_translator_files" => :environment do
     GettextSimpleRails::Translators.load_all.each do |translator_data|
       translator = translator_data[:class].new
