@@ -1,14 +1,62 @@
 class GettextSimpleRails::ModelInspector
-  def self.model_classes
-    clazzes = []
-    
+  def self.model_classes(&blk)
     ::Rails.application.eager_load!
+    @scanned = {}
     
-    ::Object.constants.each do |clazz|
-      clazz = clazz.to_s.constantize
-      next unless clazz.class == Class
-      next unless clazz < ActiveRecord::Base
-      yield ::GettextSimpleRails::ModelInspector.new(clazz)
+    constants = Module.constants + Object.constants + Kernel.constants
+    constants.each do |constant_name|
+      model_classes_scan(Kernel, constant_name, &blk)
+    end
+  end
+  
+  # Tells if a class is an ActiveRecord model and handles errors.
+  def self.active_record_status(clazz)
+    begin
+      return :yes if clazz < ActiveRecord::Base
+    rescue NoMethodError, ArgumentError
+      return :skip
+    end
+    
+    return :no
+  end
+    
+  def self.model_classes_scan(mod, constant_name, &blk)
+    return if !mod.const_defined?(constant_name)
+    
+    begin
+      clazz = mod.const_get(constant_name)
+    rescue
+      return
+    end
+    
+    result = active_record_status(clazz)
+    if result == :yes
+      blk.call(::GettextSimpleRails::ModelInspector.new(clazz))
+    elsif result == :skip
+      return
+    end
+    
+    clazz.constants.each do |class_sym|
+      # Supresses a bit of the errors.½
+      next if class_sym == :Fixtures || clazz.autoload?(class_sym)
+      
+      begin
+        class_current = clazz.const_get(class_sym)
+      rescue
+        next
+      rescue RuntimeError, LoadError
+        next
+      end
+      
+      next if !class_current.is_a?(Class) && !class_current.is_a?(Module)
+      
+      if @scanned[class_current]
+        next
+      else
+        @scanned[class_current] = true
+      end
+      
+      model_classes_scan(clazz, class_sym, &blk)
     end
   end
   

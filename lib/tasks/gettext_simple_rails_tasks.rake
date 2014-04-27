@@ -29,6 +29,13 @@ namespace :gettext_simple_rails do
   
   task "generate_model_translation_files" => :environment do
     GettextSimpleRails::ModelInspector.model_classes do |inspector|
+      puts "Class: #{inspector.clazz.name}"
+      
+      if inspector.clazz.name.to_s.match(/::Translation$/)
+        # puts "Skipping because translation: #{inspector.clazz}"
+        next
+      end
+      
       translation_path = "#{GettextSimpleRails.translation_dir}/models/#{inspector.snake_name}_model_translations.rb"
       FileUtils.mkdir_p(File.dirname(translation_path)) unless File.exists?(File.dirname(translation_path))
       
