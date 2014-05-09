@@ -13,8 +13,8 @@ class GettextSimpleRails::Translators::DateTranslator
         },
         "day_names" => [0, 1, 2, 3, 4, 5, 6],
         "abbr_day_names" => [0, 1, 2, 3, 4, 5, 6],
-        "month_names" => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-        "abbr_month_names" => [0 , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        "month_names" => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "abbr_month_names" => [0 , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
       },
       "time" => {
         "formats" => {
