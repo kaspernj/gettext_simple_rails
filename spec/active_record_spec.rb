@@ -24,5 +24,6 @@ describe GettextSimpleRails::Translators::ActiveRecordTranslator do
     cont.should include "_('activerecord.errors.models.user.attributes.name.blank')"
     cont.should include "_('activerecord.errors.models.user.attributes.name.taken')"
     cont.should include "_('activerecord.errors.models.user.attributes.name.invalid')"
+    cont.should include "_('activerecord.errors.models.user.attributes.email.invalid')"
   end
 end

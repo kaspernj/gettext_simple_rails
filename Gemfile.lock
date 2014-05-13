@@ -36,6 +36,8 @@ GEM
     arel (4.0.2)
     builder (3.1.4)
     diff-lcs (1.2.5)
+    email_validator (1.4.0)
+      activemodel
     erubis (2.7.0)
     gettext_simple (0.0.9)
     hike (1.2.3)
@@ -99,6 +101,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  email_validator
   gettext_simple_rails!
   rspec-rails
   sqlite3

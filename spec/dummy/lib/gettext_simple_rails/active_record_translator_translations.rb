@@ -12,5 +12,7 @@ class GettextSimpleRails::MonthNames
     _('activerecord.errors.models.user.attributes.name.blank')
     #. Default value: is invalid
     _('activerecord.errors.models.user.attributes.name.invalid')
+    #. Default value: is invalid
+    _('activerecord.errors.models.user.attributes.email.invalid')
   end
 end

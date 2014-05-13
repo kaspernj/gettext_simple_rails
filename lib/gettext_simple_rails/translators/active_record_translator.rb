@@ -33,17 +33,11 @@ private
           attributes_hash[attribute_name] = {} unless attributes_hash.key?(attribute_name)
           attribute_hash = attributes_hash[attribute_name]
           
-          if validator.is_a?(ActiveModel::Validations::LengthValidator)
-            translations_for_length_validator(validator, attribute_hash)
-          elsif validator.is_a?(ActiveModel::Validations::FormatValidator)
-            translations_for_format_validator(validator, attribute_hash)
-          elsif validator.is_a?(ActiveRecord::Validations::UniquenessValidator)
-            translations_for_uniqueness_validator(validator, attribute_hash)
-          elsif validator.is_a?(ActiveRecord::Validations::PresenceValidator)
-            translations_for_presence_Validator(validator, attribute_hash)
-          else
-            puts "Unknown validator: #{validator.class.name}"
-          end
+          translations_for_length_validator(validator, attribute_hash) if validator.is_a?(ActiveModel::Validations::LengthValidator)
+          translations_for_format_validator(validator, attribute_hash) if validator.is_a?(ActiveModel::Validations::FormatValidator)
+          translations_for_uniqueness_validator(validator, attribute_hash) if validator.is_a?(ActiveRecord::Validations::UniquenessValidator)
+          translations_for_presence_validator(validator, attribute_hash) if validator.is_a?(ActiveRecord::Validations::PresenceValidator)
+          translations_for_email_validator(validator, attribute_hash) if validator.class.name == "EmailValidator"
         end
       end
     end
@@ -71,7 +65,11 @@ private
     attribute_hash["taken"] = "has already been taken"
   end
   
-  def translations_for_presence_Validator(validator, attribute_hash)
+  def translations_for_presence_validator(validator, attribute_hash)
     attribute_hash["blank"] = "cannot be blank"
+  end
+  
+  def translations_for_email_validator(validator, attribute_hash)
+    attribute_hash["invalid"] = "is invalid"
   end
 end
