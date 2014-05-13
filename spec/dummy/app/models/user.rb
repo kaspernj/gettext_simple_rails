@@ -1,3 +1,7 @@
 class User < ActiveRecord::Base
   has_many :roles
+  
+  validates :name, :length => {:in => 2..255}
+  validates :name, :uniqueness => true, :presence => true
+  validates :name, :format => {:with => /\A[A-z]+\Z/}
 end
