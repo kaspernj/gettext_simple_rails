@@ -84,7 +84,7 @@ All you need to do in order to get that translated, is to open POEdit for the la
 
 ## Adding another language
 
-This is done through I18n in "application.rb". Add your language to I18n.available_locales. Then run `rake gettext_simple_rails:create` to create a sample file (to avoid doing the catalog setup yourself), open the file and begin translating.
+This is done through I18n in "application.rb". Add your language to `I18n.available_locales`. Then run `rake gettext_simple_rails:create` to create a sample file (to avoid doing the catalog setup yourself), open the file and begin translating.
 
 ## Setting the current language.
 
