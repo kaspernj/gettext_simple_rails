@@ -36,6 +36,24 @@ module GettextSimpleRails
     end
   end
   
+  def self.init
+    require "gettext_simple"
+    gettext_simple = GettextSimple.new(:i18n => true)
+    gettext_simple.load_dir("#{Rails.root}/config/locales_gettext")
+    gettext_simple.register_kernel_methods
+    
+    injector = GettextSimpleRails::I18nInjector.new
+    cache_handler = GettextSimpleRails::CacheHandler.new
+    
+    if cache_handler.cache_file_too_old?
+      puts "[GettextSimpleRails] Cache file too old - regenerating."
+      cache_handler.write_static_translation_file
+    end
+    
+    puts "[GettextSimpleRails] Injecting translations from cache."
+    injector.inject_from_static_translation_file(:path => cache_handler.static_cache_file_path)
+  end
+  
   class Translators
     def self.const_missing(name)
       require "#{::File.dirname(__FILE__)}/gettext_simple_rails/translators/#{::StringCases.camel_to_snake(name)}"

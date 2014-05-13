@@ -2,18 +2,14 @@ require "spec_helper"
 
 describe GettextSimpleRails::Translators::ActiveRecordTranslator do
   before do
-    if !$translations_generated_for_date_translator
-      $translations_generated_for_date_translator = true
-      
-      # Make it possible to call the Rake task.
-      ::Dummy::Application.load_tasks
-      
-      # Clean up any existing translations.
-      FileUtils.rm_r(GettextSimpleRails.translation_dir) if File.exists?(GettextSimpleRails.translation_dir)
-      
-      # Generate model translations so we can check them.
-      ::Rake::Task["gettext_simple_rails:generate_translator_files"].invoke
-    end
+    # Make it possible to call the Rake task.
+    ::Dummy::Application.load_tasks
+    
+    # Clean up any existing translations.
+    FileUtils.rm_r(GettextSimpleRails.translation_dir) if File.exists?(GettextSimpleRails.translation_dir)
+    
+    # Generate model translations so we can check them.
+    ::Rake::Task["gettext_simple_rails:generate_translator_files"].execute
   end
   
   it "should generate translations for validations" do

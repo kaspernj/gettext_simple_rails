@@ -1,7 +1,11 @@
 class GettextSimpleRails::I18nInjector
+  attr_reader :store_hash
+  
   def initialize(args = {})
+    @args = args
     @debug = args[:debug]
     @i18n_backend = I18n.config.backend
+    @store_hash = {} if args[:store_in_hash]
   end
   
   def inject_translator_translations(gettext_simple)
@@ -72,8 +76,15 @@ class GettextSimpleRails::I18nInjector
           end
         end
         
-        @i18n_backend.store_translations(locale.to_sym, data)
+        store_translations(locale, data)
       end
+    end
+  end
+  
+  def inject_from_static_translation_file(args)
+    translation_hash = JSON.parse(File.read(args[:path]))
+    translation_hash.each do |locale, language_hash|
+      store_translations(locale, language_hash)
     end
   end
   
@@ -107,7 +118,7 @@ private
           end
         end
         
-        @i18n_backend.store_translations(locale.to_sym, translation_hash)
+        store_translations(locale, translation_hash)
       end
     else
       raise "Unknown class: '#{translations.class.name}'."
@@ -134,6 +145,14 @@ private
       end
     end
     
-    @i18n_backend.store_translations(locale.to_sym, translation_hash)
+    store_translations(locale, translation_hash)
+  end
+  
+  def store_translations(locale, translation_hash)
+    if @args[:store_in_hash]
+      @store_hash.deep_merge!({locale.to_sym => translation_hash})
+    else
+      @i18n_backend.store_translations(locale.to_sym, translation_hash)
+    end
   end
 end

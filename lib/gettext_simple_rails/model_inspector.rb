@@ -1,7 +1,6 @@
 class GettextSimpleRails::ModelInspector
   def self.model_classes
     clazzes = []
-    
     ::Rails.application.eager_load!
     
     ::Object.constants.each do |clazz|
@@ -25,10 +24,7 @@ class GettextSimpleRails::ModelInspector
   end
   
   def paperclip_attachments
-    if !::Kernel.const_defined?("Paperclip")
-      return []
-    end
-    
+    return [] unless ::Kernel.const_defined?("Paperclip")
     Paperclip::AttachmentRegistry.names_for(@clazz).each do |name|
       yield(name)
     end

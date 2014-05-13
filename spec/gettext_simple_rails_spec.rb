@@ -3,18 +3,14 @@ require 'rake'
 
 describe GettextSimpleRails do
   before do
-    if !$translations_generated
-      $translations_generated = true
-      
-      # Make it possible to call the Rake task.
-      ::Dummy::Application.load_tasks
-      
-      # Clean up any existing translations.
-      FileUtils.rm_r(GettextSimpleRails.translation_dir) if File.exists?(GettextSimpleRails.translation_dir)
-      
-      # Generate model translations so we can check them.
-      ::Rake::Task["gettext_simple_rails:generate_model_translation_files"].invoke
-    end
+    # Make it possible to call the Rake task.
+    ::Dummy::Application.load_tasks
+    
+    # Clean up any existing translations.
+    FileUtils.rm_r(GettextSimpleRails.translation_dir) if File.exists?(GettextSimpleRails.translation_dir)
+    
+    # Generate model translations so we can check them.
+    ::Rake::Task["gettext_simple_rails:generate_model_translation_files"].execute
   end
   
   it "generates model translations" do
