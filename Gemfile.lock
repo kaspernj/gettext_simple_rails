@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    gettext_simple_rails (0.0.6)
-      gettext_simple (>= 0.0.8)
+    gettext_simple_rails (0.0.7)
+      gettext_simple (>= 0.0.9)
       rails (~> 4.0.4)
       string-cases
 
@@ -37,7 +37,7 @@ GEM
     builder (3.1.4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    gettext_simple (0.0.8)
+    gettext_simple (0.0.9)
     hike (1.2.3)
     i18n (0.6.9)
     mail (2.5.4)
