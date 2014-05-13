@@ -89,3 +89,17 @@ This is done through I18n in "application.rb". Add your language to I18n.availab
 ## Setting the current language.
 
 This is done as your normally would through `I18n.locale=`.
+
+## Model names
+
+As with I18n:
+```erb
+<%= User.model_name.human %>
+```
+
+## Model attributes
+
+As with I18n:
+```erb
+<%= User.human_attribute_name(:name) %>
+```
