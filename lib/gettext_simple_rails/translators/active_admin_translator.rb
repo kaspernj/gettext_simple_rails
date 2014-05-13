@@ -9,6 +9,14 @@ class GettextSimpleRails::Translators::ActiveAdminTranslator
         "globalize" => {
           "language" => {},
           "translations" => ""
+        },
+        "devise" => {
+          "email" => {
+            "title" => "Email"
+          },
+          "password" => {
+            "title" => "Password"
+          }
         }
       }
     }
