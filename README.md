@@ -2,8 +2,17 @@
 
 Translate your app with Gettext that converts into I18n translations. Detects most common translations and maintains adding and removing those translations by inspecting your app through a simple Rake-task.
 
+## Supports
+- Most validation error messages on models by inspecting application models
+- Model names and attributes by inspecting application models
+- Date specific texts like month names, day names, formats and so on.
+- ActiveAdmin
+- Devise
+- PaperClip
+
 # Install
 
+## Addting to application and creating appropriate files.
 Start by putting it into your Gemfile and bundle it:
 ```ruby
 gem 'gettext_simple_rails'
@@ -29,6 +38,7 @@ To inspect your app and add the appropriate .rb-files for POEdit to detect and r
 rake gettext_simple_rails:all
 ```
 
+## Installing and setting up POEdit
 If you haven't install POEdit, you can install it like this under Ubuntu:
 ```sh
 sudo apt-get install poedit
@@ -45,3 +55,51 @@ Now open a .po-file located under "config/locales_gettext/[LOCALE]/LC_MESSAGES/d
 Solve those translations and press save.
 
 Restart your Rails-app. The translations should now work.
+
+
+## Updating model-translations after changes.
+
+```sh
+rake gettext_simple_rails:all
+```
+
+Open .po-files with POEdit, press "Update", solve translations, press "Save" and restart your app.
+
+
+# Usage
+
+## Adding translated texts to your app
+
+To do a normal translation anywhere in your app, it is useally done through the "_"-method in english like so:
+```erb
+<%= _("Hello world") %>
+```
+
+All you need to do in order to get that translated, is to open POEdit for the language you wish to translate, press update, translate the new found text, press save and restart your app.
+
+## Variables in translations
+```erb
+<%= _("My name is %{name}", :name => "Kasper") %>
+```
+
+## Adding another language
+
+This is done through I18n in "application.rb". Add your language to `I18n.available_locales`. Then run `rake gettext_simple_rails:create` to create a sample file (to avoid doing the catalog setup yourself), open the file and begin translating.
+
+## Setting the current language.
+
+This is done as your normally would through `I18n.locale=`.
+
+## Model names
+
+As with I18n:
+```erb
+<%= User.model_name.human %>
+```
+
+## Model attributes
+
+As with I18n:
+```erb
+<%= User.human_attribute_name(:name) %>
+```
