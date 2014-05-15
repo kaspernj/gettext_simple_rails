@@ -4,6 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 require "gettext_simple_rails"
+require "globalize"
 
 module Dummy
   class Application < Rails::Application

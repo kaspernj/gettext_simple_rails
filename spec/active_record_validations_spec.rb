@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe GettextSimpleRails::Translators::ActiveRecordTranslator do
+describe GettextSimpleRails::Translators::ActiveRecordValidationsTranslator do
   before do
     # Make it possible to call the Rake task.
     ::Dummy::Application.load_tasks
@@ -13,7 +13,7 @@ describe GettextSimpleRails::Translators::ActiveRecordTranslator do
   end
   
   it "should generate translations for validations" do
-    filepath = "#{GettextSimpleRails.translation_dir}/active_record_translator_translations.rb"
+    filepath = "#{GettextSimpleRails.translation_dir}/active_record_validations_translator_translations.rb"
     cont = File.read(filepath)
     cont.should include "_('activerecord.errors.models.user.attributes.name.too_short')"
     cont.should include "_('activerecord.errors.models.user.attributes.name.invalid')"

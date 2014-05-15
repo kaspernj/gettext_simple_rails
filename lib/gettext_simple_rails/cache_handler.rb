@@ -7,8 +7,11 @@ class GettextSimpleRails::CacheHandler
       default_path_file = "#{Rails.root}/config/locales_gettext/#{locale}/LC_MESSAGES/default.po"
       next unless File.exists?(default_path_file)
       time = File.mtime(default_path_file)
-      newest_time = time if newest_time == nil || time > newest_time
-      newest_path = default_path_file
+      
+      if newest_time == nil || time > newest_time
+        newest_time = time
+        newest_path = default_path_file
+      end
     end
     
     return newest_path
@@ -35,7 +38,6 @@ class GettextSimpleRails::CacheHandler
     gs.register_kernel_methods
     
     injector = GettextSimpleRails::I18nInjector.new(:store_in_hash => true)
-    injector.inject_model_translations(gs)
     injector.inject_translator_translations(gs)
     
     File.open(static_cache_file_path, "w") do |fp|

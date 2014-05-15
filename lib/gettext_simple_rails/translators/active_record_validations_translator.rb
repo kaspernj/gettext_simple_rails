@@ -1,6 +1,6 @@
-class GettextSimpleRails::Translators::ActiveRecordTranslator
+class GettextSimpleRails::Translators::ActiveRecordValidationsTranslator
   def detected?
-    true
+    ::Kernel.const_defined?("ActiveRecord")
   end
   
   def translations
@@ -8,7 +8,7 @@ class GettextSimpleRails::Translators::ActiveRecordTranslator
       "activerecord" => {
         "errors" => {
           "messages" => {
-            "record_invalid" => "Invalid record"
+            "record_invalid" => "Invalid record: %{errors}"
           },
           "models" => {}
         }
@@ -29,6 +29,8 @@ private
       attributes_hash = @translations_hash["activerecord"]["errors"]["models"][clazz_snake_name]["attributes"]
       
       inspector.clazz._validators.each do |attribute_name, validators|
+        attribute_name = attribute_name.to_s
+        
         validators.each do |validator|
           attributes_hash[attribute_name] = {} unless attributes_hash.key?(attribute_name)
           attribute_hash = attributes_hash[attribute_name]

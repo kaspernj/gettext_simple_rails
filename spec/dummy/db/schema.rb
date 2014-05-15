@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411112622) do
-
-  create_table "gettext_simple_rails_roles", force: true do |t|
-    t.string   "role"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140515092420) do
 
   create_table "roles", force: true do |t|
     t.string   "role"
@@ -26,6 +19,17 @@ ActiveRecord::Schema.define(version: 20140411112622) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_translations", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "user_translations", ["locale"], name: "index_user_translations_on_locale"
+  add_index "user_translations", ["user_id"], name: "index_user_translations_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
