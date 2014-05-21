@@ -24,7 +24,7 @@ class GettextSimpleRails::CacheHandler
   def cache_file_too_old?
     if !File.exists?(static_cache_file_path)
       return true
-    elsif File.mtime(static_cache_file_path) < File.mtime(newest_po_file)
+    elsif newest_po_file && File.mtime(static_cache_file_path) < File.mtime(newest_po_file)
       return true
     else
       return false
