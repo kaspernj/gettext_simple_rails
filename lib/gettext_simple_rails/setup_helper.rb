@@ -1,5 +1,5 @@
 class GettextSimpleRails::SetupHelper
-  def initialize(args)
+  def initialize(args = {})
     @args = args
   end
   

@@ -54,7 +54,7 @@ namespace :gettext_simple_rails do
   end
   
   task "create_poedit_ruby_parser" do
-    setup_helper = GettextSimpleRails::SetupHelper
+    setup_helper = GettextSimpleRails::SetupHelper.new
     raise "POEdit config file could not be found in: #{setup_helper.poedit_config_path}" unless File.exists?(setup_helper.poedit_config_path)
     
     if setup_helper.poedit_config_has_ruby_parser?
