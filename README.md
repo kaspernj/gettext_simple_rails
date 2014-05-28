@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/kaspernj/gettext_simple_rails.png)](https://codeclimate.com/github/kaspernj/gettext_simple_rails)
+
 # GettextSimpleRails
 
 Translate your app with Gettext that converts into I18n translations. Detects most common translations and maintains adding and removing those translations by inspecting your app through a simple Rake-task.
