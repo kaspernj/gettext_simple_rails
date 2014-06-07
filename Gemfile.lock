@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gettext_simple_rails (0.0.14)
+    gettext_simple_rails (0.0.15)
       gettext_simple (>= 0.0.9)
       rails (~> 4.0.4)
       string-cases
@@ -51,7 +51,7 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.9.2)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
