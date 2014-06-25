@@ -50,7 +50,6 @@ module GettextSimpleRails
       cache_handler.write_static_translation_file
     end
     
-    puts "[GettextSimpleRails] Injecting translations from cache."
     injector.inject_from_static_translation_file(:path => cache_handler.static_cache_file_path)
   end
   
