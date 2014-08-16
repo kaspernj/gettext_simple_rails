@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/kaspernj/gettext_simple_rails.png)](https://codeclimate.com/github/kaspernj/gettext_simple_rails)
+[![Test Coverage](https://codeclimate.com/github/kaspernj/gettext_simple_rails/badges/coverage.svg)](https://codeclimate.com/github/kaspernj/gettext_simple_rails)
 
 # GettextSimpleRails
 
