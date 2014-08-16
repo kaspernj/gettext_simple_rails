@@ -14,5 +14,7 @@ class GettextSimpleRails::MonthNames
     _('activerecord.errors.models.user.attributes.name.invalid')
     #. Default value: is invalid
     _('activerecord.errors.models.user.attributes.email.invalid')
+    #. Default value: Cannot delete record because dependent %{record} exist
+    _('activerecord.errors.models.user.attributes.base.restrict_dependent_destroy.many')
   end
 end
