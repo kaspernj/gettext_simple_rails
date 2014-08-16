@@ -1,3 +1,4 @@
+[![Build Status](https://api.shippable.com/projects/53ef5514c9dd70f003fbf2e2/badge/master)](https://www.shippable.com/projects/53ef5514c9dd70f003fbf2e2)
 [![Code Climate](https://codeclimate.com/github/kaspernj/gettext_simple_rails.png)](https://codeclimate.com/github/kaspernj/gettext_simple_rails)
 [![Test Coverage](https://codeclimate.com/github/kaspernj/gettext_simple_rails/badges/coverage.svg)](https://codeclimate.com/github/kaspernj/gettext_simple_rails)
 
