@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    gettext_simple_rails (0.0.16)
+    gettext_simple_rails (0.0.18)
       gettext_simple (>= 0.0.9)
-      rails (~> 4.0.4)
+      rails (>= 4.0.0)
       string-cases
 
 GEM
@@ -39,6 +39,12 @@ GEM
     email_validator (1.4.0)
       activemodel
     erubis (2.7.0)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
+    forgery (0.6.0)
     gettext_simple (0.0.9)
     globalize (4.0.1)
       activemodel (>= 4.0.0, < 5)
@@ -105,6 +111,8 @@ PLATFORMS
 
 DEPENDENCIES
   email_validator
+  factory_girl_rails
+  forgery
   gettext_simple_rails!
   globalize (~> 4.0.1)
   rspec-rails
